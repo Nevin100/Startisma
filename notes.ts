@@ -53,3 +53,9 @@
 //    - It provides commands for generating the Prisma Client, running migrations, and managing your database
 //      schema.
 
+// # Prisma after craeting Models :
+// 1.) To apply the changes to your database schema, you need to run the following command:
+//    - `npx prisma migrate dev --name <migration_name>`
+// 2.) After creating models in `schema.prisma`, you need to run the following command to generate the Prisma Client:
+//    - `npx prisma generate`
+//    - This command generates the Prisma Client based on the models defined in your schema.

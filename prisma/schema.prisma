@@ -13,3 +13,9 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id    Int    @id @default(autoincrement()) // Unique identifier for the user
+  name  String // Name of the user
+  email String @unique
+}

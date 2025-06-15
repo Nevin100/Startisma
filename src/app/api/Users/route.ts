@@ -24,3 +24,38 @@ export async function GET() {
     );
   }
 }
+
+export async function POST(request: Request) {
+  try {
+    const body = await request.json();
+    const { name, email } = body;
+    
+    if (!name || !email ) {
+      return NextResponse.json(
+        { message: "Name, email, and password are required.", error: true }, { status: 400 });
+    }
+
+    const user = await prisma.user.findUnique({
+      where: { email: email }
+    });
+
+    if (user) {
+      return NextResponse.json({ message: "User already exists", error: true }, { status: 401 });
+    }
+
+    const newUser = await prisma.user.create({
+      data: {
+        name: name,
+        email: email,
+      }
+    });
+
+    if(newUser) {
+      return NextResponse.json({ message: "User created successfully", data: newUser, error: false }, { status: 201 });
+    }
+    
+  } catch (error) {
+    console.log(error);
+    return NextResponse.json({message:"Internal Server Issue", error: true}, { status: 500 });
+  }
+}

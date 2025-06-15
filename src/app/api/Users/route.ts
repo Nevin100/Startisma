@@ -4,6 +4,7 @@ import { NextResponse } from "next/server";
 
 const prisma = new PrismaClient();
 
+// Get All Users :
 export async function GET() {
   try {
     const users = await prisma.user.findMany();
@@ -25,6 +26,7 @@ export async function GET() {
   }
 }
 
+// Create User :
 export async function POST(request: Request) {
   try {
     const body = await request.json();
